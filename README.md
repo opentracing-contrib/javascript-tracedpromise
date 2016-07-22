@@ -7,7 +7,7 @@
 Install with `npm`. (*Note: you may need a relatively recent version of NPM to support scoped packages*.)
 
 ```bash
-npm install --save @opentracing/tracedpromise
+npm install --save opentracing-tracedpromise
 ```
 
 See `src/examples/demo.js` for a short example.

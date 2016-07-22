@@ -1,5 +1,5 @@
 {
-  "name": "@opentracing/tracedpromise",
+  "name": "opentracing-tracedpromise",
   "description": "A Promise class modified to allow use of OpenTracing",
   "version": "1.0.1",
   "license": "MIT",
