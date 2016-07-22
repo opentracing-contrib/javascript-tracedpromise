@@ -1,7 +1,7 @@
 {
   "name": "@opentracing/tracedpromise",
   "description": "A Promise class modified to allow use of OpenTracing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "repository": "https://github.com/opentracing-contrib/tracedpromise",
   "main": "lib/tracedpromise.js",
