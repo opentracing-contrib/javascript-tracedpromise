@@ -1,4 +1,4 @@
-import opentracing from 'opentracing';
+import * as opentracing from 'opentracing';
 
 /*
  * wrapResolve is a helper that takes a standard ES6 Promise resolve callback
@@ -25,7 +25,7 @@ function wrapReject(span, f) {
         return f;
     }
     return function (...args) {
-        span.setTag('error', 'true');
+        span.setTag('error', true);
         span.finish();
         return f(...args);
     };
@@ -41,7 +41,7 @@ function chainFinishSpan(promise, span) {
         span.finish();
         return value;
     }, (reason) => {
-        span.setTag('error', 'true');
+        span.setTag('error', true);
         span.finish();
         return Promise.reject(reason);
     });
@@ -63,7 +63,8 @@ export default class TracedPromise {
      *        standard ES6 Promise.
      */
     constructor(parent, name, callback) {
-        let span = opentracing.startSpan(name, { childOf : parent });
+        let span = opentracing.globalTracer()
+                              .startSpan(name, { childOf : parent });
         let wrappedCallback = (resolve, reject) => callback(
             wrapResolve(span, resolve),
             wrapReject(span, reject)

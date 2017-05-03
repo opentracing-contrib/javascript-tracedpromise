@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import opentracing from 'opentracing';
+import * as opentracing from 'opentracing';
 import lightstep from 'lightstep-tracer';
 import TracedPromise from '../..';
 
@@ -9,13 +9,13 @@ require('source-map-support');
 // Initialize the tracing implementation, in this case LightStep is used.
 // Replace '{your_access_token}' with your LightStep access token to send the
 // tracing data to your project.
-opentracing.initGlobalTracer(lightstep.tracer({
+opentracing.initGlobalTracer(new lightstep.Tracer({
     access_token   : '{your_access_token}',
     component_name : 'TracedPromise',
 }));
 
 // Set up an initial span to track all the subsequent work
-let parent = opentracing.startSpan('Promises.all');
+let parent = opentracing.globalTracer().startSpan('Promises.all');
 
 // Set up the child promises that run in parallel.
 // Simply timeouts are being used here. In a real world application, these might

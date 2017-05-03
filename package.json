@@ -10,7 +10,7 @@
     "demo": "make demo"
   },
   "dependencies": {
-    "opentracing": "^0.10.4"
+    "opentracing": "^0.13.0"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
@@ -21,7 +21,7 @@
     "eslint-plugin-import": "^1.11.0",
     "eslint-plugin-jsx-a11y": "^2.0.1",
     "eslint-plugin-react": "^5.2.2",
-    "lightstep-tracer": "^0.11.1",
+    "lightstep-tracer": "^0.20.3",
     "source-map-loader": "^0.1.5"
   }
 }
