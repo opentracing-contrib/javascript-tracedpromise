@@ -54,9 +54,10 @@ export default class TracedPromise {
     /**
      * Constructs anew TracedPromise
      *
-     * @param {Object} options - the options used to create the span for this
-     *        promise or its parent span.  Pass `null` for a promise that does
-     *        not have a parent.
+     * @param {Object} options - An `opentracing.SpanOptions` used to create the
+     *        span for this promise or its parent span.  Pass `null` for a
+     *        promise that does not have a parent. See
+     *        https://opentracing-javascript.surge.sh/interfaces/spanoptions.html
      * @param {string} name - name to use for the span created internally by
      *        the TracedPromise.
      * @param {Function} callback - callback to use to resolve the promise. The
