@@ -54,8 +54,8 @@ export default class TracedPromise {
     /**
      * Constructs anew TracedPromise
      *
-     * @param {Object} options - the options to used to create the span for this
-     *        promise or the parent span.  Pass `null` for a promise that does
+     * @param {Object} options - the options used to create the span for this
+     *        promise or its parent span.  Pass `null` for a promise that does
      *        not have a parent.
      * @param {string} name - name to use for the span created internally by
      *        the TracedPromise.
