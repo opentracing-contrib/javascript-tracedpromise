@@ -72,7 +72,8 @@ export default class TracedPromise {
                               .startSpan(name, opts);
         let wrappedCallback = (resolve, reject) => callback(
             wrapResolve(span, resolve),
-            wrapReject(span, reject)
+            wrapReject(span, reject),
+            span
         );
         this._promise = new Promise(wrappedCallback);
         this._span = span;

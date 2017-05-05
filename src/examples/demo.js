@@ -24,8 +24,13 @@ let parent = opentracing.globalTracer().startSpan('Promises.all');
 let p1 = new TracedPromise(parent, 'p1', (resolve, reject) => {
     setTimeout(resolve, 100, 'one');
 });
-let p2 = new TracedPromise(parent, 'p2', (resolve, reject) => {
-    setTimeout(resolve, 200, 'two');
+let p2 = new TracedPromise(parent, 'p2', (resolve, reject, span) => {
+    let childSpan = opentracing.globalTracer()
+                               .startSpan('p2Child', { childOf : span });
+    setTimeout((arg) => {
+        childSpan.finish();
+        resolve(arg);
+    }, 200, 'two');
 });
 let p3 = new TracedPromise(parent, 'p3', (resolve, reject) => {
     setTimeout(resolve, 300, 'three');
