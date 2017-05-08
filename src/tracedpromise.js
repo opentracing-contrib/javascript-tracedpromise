@@ -54,20 +54,27 @@ export default class TracedPromise {
     /**
      * Constructs anew TracedPromise
      *
-     * @param {Span} parent - the parent of the span created by this promise.
-     *        Pass `null` for a promise that does not have a parent.
+     * @param {Object} options - An `opentracing.SpanOptions` used to create the
+     *        span for this promise or its parent span.  Pass `null` for a
+     *        promise that does not have a parent. See
+     *        https://opentracing-javascript.surge.sh/interfaces/spanoptions.html
      * @param {string} name - name to use for the span created internally by
      *        the TracedPromise.
      * @param {Function} callback - callback to use to resolve the promise. The
      *        signature and behavior should be that of a callback passed to a
      *        standard ES6 Promise.
      */
-    constructor(parent, name, callback) {
+    constructor(options, name, callback) {
+        let opts = options;
+        if (options instanceof opentracing.Span) {
+            opts = { childOf : options };
+        }
         let span = opentracing.globalTracer()
-                              .startSpan(name, { childOf : parent });
+                              .startSpan(name, opts);
         let wrappedCallback = (resolve, reject) => callback(
             wrapResolve(span, resolve),
-            wrapReject(span, reject)
+            wrapReject(span, reject),
+            span
         );
         this._promise = new Promise(wrappedCallback);
         this._span = span;
